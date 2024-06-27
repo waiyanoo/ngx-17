@@ -198,20 +198,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Tables & Data',
-    icon: 'grid-outline',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-      {
-        title: 'Tree Grid',
-        link: '/pages/tables/tree-grid',
-      },
-    ],
-  },
+  // {
+  //   title: 'Tables & Data',
+  //   icon: 'grid-outline',
+  //   children: [
+  //     {
+  //       title: 'Smart Table',
+  //       link: '/pages/tables/smart-table',
+  //     },
+  //     {
+  //       title: 'Tree Grid',
+  //       link: '/pages/tables/tree-grid',
+  //     },
+  //   ],
+  // },
   {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
