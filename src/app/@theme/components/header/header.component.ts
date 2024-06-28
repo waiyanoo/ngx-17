@@ -6,6 +6,7 @@ import {LayoutService} from '../../../@core/utils';
 import {map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {NbAuthService} from "@nebular/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-header',
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private userService: UserData,
               private layoutService: LayoutService,
               private nbAuthService: NbAuthService,
+              private router: Router,
               private breakpointService: NbMediaBreakpointsService) {
   }
 
@@ -101,7 +103,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onItemSelection(event: NbMenuBag) {
     console.log(event)
     if(event.item.title === 'Log out'){
-      this.nbAuthService.logout('email');
+      // this.nbAuthService.logout('email');
+        this.nbAuthService.logout('email').subscribe(out => {
+          if(out.isSuccess()){
+            this.router.navigate(['/auth/login'])
+          }
+        })
     }
   }
 }

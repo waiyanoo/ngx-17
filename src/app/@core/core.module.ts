@@ -130,9 +130,10 @@ export const NB_CORE_PROVIDERS = [
           },
         },
         logout: {
+          endpoint: '',
           redirect: {
             success: '/auth/login',
-            failure: null, // stay on the same page
+            failure: null,
           },
         },
       }),
