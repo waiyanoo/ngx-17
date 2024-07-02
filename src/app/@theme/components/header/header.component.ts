@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuBag, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NbMediaBreakpointsService, NbMenuBag, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 
 import {UserData} from '../../../@core/data/users';
 import {LayoutService} from '../../../@core/utils';
@@ -28,14 +28,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       value: 'dark',
       name: 'Dark',
     },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
+    // {
+    //   value: 'cosmic',
+    //   name: 'Cosmic',
+    // },
+    // {
+    //   value: 'corporate',
+    //   name: 'Corporate',
+    // },
   ];
 
   currentTheme = 'default';
@@ -109,6 +109,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.router.navigate(['/auth/login'])
           }
         })
+    }
+    // For testing
+    else {
+      const token = this.nbAuthService.getToken()
+      token.subscribe(ob => {
+        console.log("Token", ob.isValid())
+        console.log("Token name", ob.getName())
+      })
+
+
     }
   }
 }

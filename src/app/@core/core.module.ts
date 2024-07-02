@@ -1,6 +1,12 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NbAuthJWTToken, NbAuthModule, NbDummyAuthStrategy, NbPasswordAuthStrategy} from '@nebular/auth';
+import {
+  NbAuthJWTToken,
+  NbAuthModule,
+  NbAuthOAuth2Token,
+  NbDummyAuthStrategy,
+  NbPasswordAuthStrategy
+} from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
@@ -52,6 +58,7 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
+import {CustomJWTToken} from "./custom-JWT-Token";
 
 const socialLinks = [
   {
@@ -110,8 +117,8 @@ export const NB_CORE_PROVIDERS = [
         name: 'email',
         baseEndpoint: 'http://localhost:8080',
         token: {
-          class: NbAuthJWTToken,
-          key: 'token', // this parameter tells where to look for the token
+          class: CustomJWTToken,
+          key: 'accessToken',
         },
         login: {
           endpoint: '/api/auth/signin',
@@ -130,12 +137,23 @@ export const NB_CORE_PROVIDERS = [
           },
         },
         logout: {
-          endpoint: '',
+          endpoint: '/api/auth/signout',
+          method: 'POST',
           redirect: {
             success: '/auth/login',
             failure: null,
           },
         },
+        refreshToken:  {
+          endpoint: '/api/auth/refreshtoken',
+          requireValidToken: true,
+          redirect: {
+            success: null,
+            failure: null,
+          },
+          defaultErrors: ['Something went wrong, please try again.'],
+          defaultMessages: ['Your token has been successfully refreshed.'],
+        }
       }),
     ],
     forms: {
